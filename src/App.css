@@ -19,9 +19,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 40px 20px;
 }
 
 .App-link {
@@ -35,4 +36,95 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1 {
+  margin-bottom: 0;
+  background: linear-gradient(45deg, #ff6464, #64c864, #6464ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 2.5rem;
+}
+
+h2 {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.explanation {
+  margin-top: 30px;
+  font-size: 1rem;
+  max-width: 400px;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.explanation ul {
+  padding-left: 20px;
+}
+
+.explanation li {
+  margin: 10px 0;
+}
+
+.additional-info {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+}
+
+.additional-info p {
+  margin-bottom: 10px;
+}
+
+.additional-info ul {
+  margin-top: 5px;
+}
+
+.additional-info li {
+  margin: 5px 0;
+}
+
+.fast-text {
+  color: #ff6464;
+  font-weight: bold;
+}
+
+.good-text {
+  color: #64c864;
+  font-weight: bold;
+}
+
+.cheap-text {
+  color: #6464ff;
+  font-weight: bold;
+}
+
+.app-footer {
+  margin-top: 40px;
+  font-size: 0.8rem;
+  opacity: 0.6;
 }
