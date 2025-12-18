@@ -135,7 +135,7 @@
   text-align: center;
   font-size: 3rem;
   font-weight: 800;
-  min-height: 120px; /* Increased from 80px to accommodate 2 lines if needed */
+  height: 160px; /* Fixed height to prevent layout shift */
   color: var(--text-primary);
   border: none;
   display: flex;
