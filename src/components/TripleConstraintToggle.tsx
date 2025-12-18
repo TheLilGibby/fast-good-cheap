@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './TripleConstraintToggle.css';
 
 interface Constraint {
@@ -40,10 +40,10 @@ const TripleConstraintToggle: React.FC = () => {
           newConstraints[oldestIndex].timestamp = null;
           
           // Set message about what was deselected
-          setMessage(`"${newConstraints[oldestIndex].name}" was automatically deselected`);
+          // setMessage(`"${newConstraints[oldestIndex].name}" was automatically deselected`);
           
           // Clear message after 2 seconds
-          setTimeout(() => setMessage(''), 2000);
+          // setTimeout(() => setMessage(''), 2000);
         }
       }
       
@@ -62,19 +62,46 @@ const TripleConstraintToggle: React.FC = () => {
   // Get the current combination message
   const getCombinationMessage = () => {
     const enabled = constraints.filter(c => c.enabled);
-    if (enabled.length !== 2) return '';
+    if (enabled.length !== 2) return null;
     
     const names = enabled.map(c => c.name);
     
     if (names.includes('Fast') && names.includes('Good')) {
-      return 'Fast + Good = Expensive (not cheap)';
+      return (
+        <>
+          <span className="msg-part fast">Fast</span>
+          <span className="msg-operator">+</span>
+          <span className="msg-part good">Good</span>
+          <span className="msg-operator">=</span>
+          <span className="msg-result">Expensive</span>
+          <span className="msg-tradeoff">(not cheap)</span>
+        </>
+      );
     } else if (names.includes('Fast') && names.includes('Cheap')) {
-      return 'Fast + Cheap = Low quality (not good)';
+      return (
+        <>
+          <span className="msg-part fast">Fast</span>
+          <span className="msg-operator">+</span>
+          <span className="msg-part cheap">Cheap</span>
+          <span className="msg-operator">=</span>
+          <span className="msg-result">Low Quality</span>
+          <span className="msg-tradeoff">(not good)</span>
+        </>
+      );
     } else if (names.includes('Good') && names.includes('Cheap')) {
-      return 'Good + Cheap = Slow (not fast)';
+      return (
+        <>
+          <span className="msg-part good">Good</span>
+          <span className="msg-operator">+</span>
+          <span className="msg-part cheap">Cheap</span>
+          <span className="msg-operator">=</span>
+          <span className="msg-result">Slow</span>
+          <span className="msg-tradeoff">(not fast)</span>
+        </>
+      );
     }
     
-    return '';
+    return null;
   };
 
   return (
@@ -82,20 +109,26 @@ const TripleConstraintToggle: React.FC = () => {
       <div className="toggle-container">
         {constraints.map((constraint, index) => (
           <div key={constraint.name} className="constraint-toggle">
-            <label className={`toggle-label ${constraint.name.toLowerCase()}-label ${constraint.enabled ? 'enabled' : ''}`}>
+            <div 
+              className={`toggle-label ${constraint.name.toLowerCase()}-label ${constraint.enabled ? 'enabled' : ''}`}
+              onClick={() => handleToggle(index)}
+            >
               <div className="toggle-name">{constraint.name}</div>
               <div 
                 className={`toggle-switch ${constraint.name.toLowerCase()}-switch ${constraint.enabled ? 'enabled' : ''}`}
-                onClick={() => handleToggle(index)}
               >
                 <div className="toggle-slider"></div>
               </div>
-            </label>
+            </div>
           </div>
         ))}
       </div>
       
-      {message && <div className="toggle-message">{message}</div>}
+      {/* {message && (
+        <div className="toast-container">
+          <div className="toast-message">{message}</div>
+        </div>
+      )} */}
       
       <div className="combination-message">
         {getCombinationMessage()}
